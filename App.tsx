@@ -28,7 +28,6 @@ const ViewBoxesWithColorAndText = () => {
         }}>
           <View style={{backgroundColor:'blue', flex:1}}/>
           <View style={{backgroundColor: 'red', flex:1}}/>
-          <View style={{backgroundColor: 'orange', flex:1}}/>
           <Text>Hello world!</Text>
         </View>
       </SafeAreaView>
