@@ -1,41 +1,33 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.dummyText}>
-        <Text>Hello, World!</Text>
+  return(
+    <View style={styles.appContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.textInput} placeholder='your name here'></TextInput>
+        <Button title='Add'></Button>
       </View>
-      <Text style={styles.dummyText}>I am programer</Text>
-      <View style={styles.tableWrap}>
-        <Button title="click here!"/>
-        <Button title="click here!"/>
-        <Button title="click here!"/>
-        <Button title="click here!"/>
-        <Button title="click here!"/>
+      <View>
+        <Text>your goal is like this...</Text>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  container : {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-    alignItems: 'center',
-    justifyContent: 'center'
+  appContainer : {
+    padding: 50,
   },
-  dummyText: {
-    margin: 16,
-    borderColor: '#4994EC',
-    borderWidth: 2,
-    padding: 16,
-  },
-  tableWrap: {
-    flex: 1,
+  inputContainer : {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: 4,
+    justifyContent: 'space-between',
+  },
+  textInput : {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    marginRight: 8,
+    padding: 8,
+
   }
-})
+});
