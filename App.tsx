@@ -1,15 +1,19 @@
 import { useState } from 'react';
-import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import {StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
-const [enteredGoalText, setEnteredGoalText] = useState('')
+const [enteredGoalText, setEnteredGoalText] = useState(''); // 앞에는 현재 상태값을 나타내는 변수를 정의하고, 뒤에는 상태값 업데이트를 위한 함수를 정의하고, useState로 초기값을 설정한다. 
+const [courseGoals, setCourseGoals] = useState<string[]>([]);
 
   function goalInputHandler(enteredText : string) {
-    setEnteredGoalText(enteredText)
+    setEnteredGoalText(enteredText);
   };
 
   function addGoalHandler () {
-    console.log(enteredGoalText)
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals, 
+      enteredGoalText
+    ]);
   };
   return(
     <View style={styles.appContainer}>
@@ -25,7 +29,9 @@ const [enteredGoalText, setEnteredGoalText] = useState('')
           />
       </View>
       <View style={styles.goalsContainer}>
-        <Text>your goal is like this...</Text>
+        <ScrollView >
+          {courseGoals.map((goal) =><Text style={styles.goalItems} key={goal}>{goal}</Text>)}
+        </ScrollView>
       </View>
     </View>
   );
@@ -56,5 +62,12 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex:4,
+  },
+  goalItems: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 4,
+    backgroundColor: '#4994EC',
+    color: 'white',
   }
 });
