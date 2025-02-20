@@ -1,12 +1,12 @@
 import { Text, StyleSheet } from "react-native";
 
 function GoalItem(props) {
-    return(
-        <Text style={styles.goalItems}>{props.text}</Text>
+    return (
+        <Text style={styles.goalItems}>{props.value}</Text>
     )
 };
 
-export default GoalItem; 
+export default GoalItem;
 
 const styles = StyleSheet.create({
     goalItems: {
@@ -15,5 +15,5 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         backgroundColor: '#4994EC',
         color: 'white',
-      }
+    }
 })
