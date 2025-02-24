@@ -22,6 +22,15 @@ export default function App() {
       // key를 id로 바꿈. -> API로 데이터를 가져올 경우는 키를 사용못할수도 있기때문. 대신 아래 FlatList에 keyExtractor 추가.
     ]);
   };
+
+  function deleteGoalHandler(id: string) {
+    setCourseGoals((currentCourseGoals) => {
+      return (
+        currentCourseGoals.filter((goal) => goal.id !== id) //주어진 조건이 true일 경우만 새배열로 받음
+      )
+    })
+  };
+
   return (
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -31,7 +40,10 @@ export default function App() {
           renderItem={(itemData) => {
             //itemData.index // itemData는 Index 프로퍼티 접근 권한도 제공.
             return (
-              <GoalItem value={itemData.item.text} />
+              <GoalItem
+                value={itemData.item.text}
+                id={itemData.item.id}
+                onDeleteItem={deleteGoalHandler} />
             );
           }}
           keyExtractor={(item, index) => {
