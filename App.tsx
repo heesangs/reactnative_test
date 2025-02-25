@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Button } from 'react-native';
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
@@ -10,7 +10,14 @@ export default function App() {
     id: string;
   }
   const [courseGoals, setCourseGoals] = useState<Goal[]>([]);
+  const [modalIsVisible, setModalIsVisible] = useState(false);
 
+  function addModalHandler() {
+    setModalIsVisible(true)
+  }
+  function endModalHandler() {
+    setModalIsVisible(false)
+  }
 
 
   function addGoalHandler(enteredGoalText: string) {
@@ -21,6 +28,7 @@ export default function App() {
       // 최근 입력한 goal! 
       // key를 id로 바꿈. -> API로 데이터를 가져올 경우는 키를 사용못할수도 있기때문. 대신 아래 FlatList에 keyExtractor 추가.
     ]);
+    setModalIsVisible(false);
   };
 
   function deleteGoalHandler(id: string) {
@@ -33,7 +41,16 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button
+        title='Add New Goal'
+        color={'#4994EC'}
+        onPress={addModalHandler}
+      ></Button>
+      <GoalInput
+        visible={modalIsVisible}
+        onAddGoal={addGoalHandler}
+        endModal={endModalHandler}
+      />
       <View style={styles.goalsContainer}>
         <FlatList
           data={courseGoals}
