@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, View, FlatList, Button } from 'react-native';
+import { StatusBar } from 'react-native';
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
@@ -40,39 +41,40 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title='Add New Goal'
-        color={'#4994EC'}
-        onPress={addModalHandler}
-      ></Button>
-      <GoalInput
-        visible={modalIsVisible}
-        onAddGoal={addGoalHandler}
-        endModal={endModalHandler}
-      />
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => {
-            //itemData.index // itemData는 Index 프로퍼티 접근 권한도 제공.
-            return (
-              <GoalItem
-                value={itemData.item.text}
-                id={itemData.item.id}
-                onDeleteItem={deleteGoalHandler} />
-            );
-          }}
-          keyExtractor={(item, index) => {
-            // 모든 항목에서 키를 가져온다.
-            // id 는 고유한 값을 가지고 있으므로 좋은 key가 된다. 
-            return item.id
-          }}
-          alwaysBounceVertical={false} />
+      <View style={styles.appContainer}>
+        <Button
+          title='Add New Goal'
+          color={'#4994EC'}
+          onPress={addModalHandler}
+        ></Button>
+        <GoalInput
+          visible={modalIsVisible}
+          onAddGoal={addGoalHandler}
+          endModal={endModalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              //itemData.index // itemData는 Index 프로퍼티 접근 권한도 제공.
+              return (
+                <GoalItem
+                  value={itemData.item.text}
+                  id={itemData.item.id}
+                  onDeleteItem={deleteGoalHandler} />
+              );
+            }}
+            keyExtractor={(item, index) => {
+              // 모든 항목에서 키를 가져온다.
+              // id 는 고유한 값을 가지고 있으므로 좋은 key가 된다. 
+              return item.id
+            }}
+            alwaysBounceVertical={false} />
+        </View>
       </View>
-    </View>
   );// 스크롤뷰에 대한 다양한 프로퍼티(props)를 공식문서에서 확인해보자.
   // FlatList에 data(props) 넣고 텍스트를 잘라내고 self-closing을 한다. renderItem(props)를 넣는다.이녀석은 FlatList에 지시하는 함수를 값으로 갖는 props이다. 
+
 }
 
 const styles = StyleSheet.create({
